@@ -1,0 +1,395 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Your Eyes Only</title>
+<style>
+:root {
+  --pink: #ff5c9a;
+  --dark: #54283b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background: #ffd6e6;
+  color: var(--dark);
+}
+#app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 18%, #ffffffb8 0 7%, transparent 28%),
+    radial-gradient(circle at 82% 78%, #ff8fbd88 0 8%, transparent 30%),
+    linear-gradient(135deg, #f8c9df, #fff4f9 48%, #f5b8d3);
+}
+.card {
+  width: min(100%, 760px);
+  padding: clamp(25px, 7vw, 65px);
+  border: 1px solid #ffffffb8;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #ffffffa8, #fff7fba8);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  backdrop-filter: blur(24px) saturate(145%);
+  box-shadow: 0 30px 100px #a0376329, inset 0 1px 0 #ffffffd9;
+}
+.topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #a46b82;
+  font-size: .72rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pink);
+  margin-right: 8px;
+}
+.index { color: var(--pink); }
+.cute-page { text-align: center; }
+.cat-sticker {
+  width: 145px;
+  margin: 10px auto;
+  animation: bob 4s ease-in-out infinite;
+}
+.cat-sticker svg { width: 100%; }
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.cute-title {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  letter-spacing: -.07em;
+  margin: 20px 0 12px;
+}
+.cute-title span { color: var(--pink); }
+.cute-subtitle {
+  color: #946477;
+  line-height: 1.7;
+  margin: 0 auto 25px;
+}
+.question-box {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 24px;
+  padding: 18px 35px;
+  border: 1px solid #ffffffd9;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ffffffa8, #ffe6f1a8);
+  backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: 0 10px 28px #d96b9928, inset 0 1px 0 #ffffffed;
+}
+.cute-question {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  margin: 0;
+}
+.cute-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  min-height: 75px;
+}
+button {
+  border: 1px solid #efb1ca;
+  border-radius: 999px;
+  padding: 15px 25px;
+  font-size: .95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+button:hover { transform: translateY(-3px); }
+.yes {
+  background: var(--pink);
+  color: white;
+  border-color: var(--pink);
+  position: relative;
+  z-index: 2;
+  transform-origin: center;
+}
+.no {
+  background: #ffe1ed;
+  color: #71334e;
+}
+.cute-reply {
+  min-height: 30px;
+  margin-top: 20px;
+  color: #d83e7b;
+  font-weight: 600;
+}
+.tiny-note {
+  color: #a46b82;
+  font-size: .8rem;
+  margin-top: 25px;
+}
+.question-page, .reward-page { display: none; }
+.question-page h2 {
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin: 12px 0;
+}
+.intro {
+  text-align: center;
+  color: #946477;
+  margin-bottom: 25px;
+}
+.question-cats {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px auto;
+}
+.question-cats svg {
+  width: clamp(55px, 15vw, 85px);
+  animation: bob 4s ease-in-out infinite;
+  filter: drop-shadow(0 6px 5px #9c456526);
+}
+.question-cats svg:nth-child(2) { animation-delay: -1.7s; }
+.question-cats svg:nth-child(3) { animation-delay: -.9s; }
+.question-cats svg:nth-child(4) { animation-delay: -2.2s; }
+.question-form {
+  display: grid;
+  gap: 18px;
+}
+.question-form label {
+  display: grid;
+  gap: 8px;
+  color: #71334e;
+  font-weight: 700;
+}
+.question-form input {
+  width: 100%;
+  border: 1px solid #efb1ca;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: white;
+  color: var(--dark);
+  font: inherit;
+}
+.question-form button {
+  background: var(--pink);
+  color: white;
+  border-color: var(--pink);
+}
+.reward-page { text-align: center; }
+.reward-page h2 {
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  margin: 15px 0;
+}
+.reward-page p {
+  color: #946477;
+  line-height: 1.7;
+}
+.countdown {
+  display: inline-block;
+  margin: 12px auto;
+  padding: 13px 20px;
+  border: 1px solid white;
+  border-radius: 16px;
+  background: #ffffffa8;
+  color: #a52e62;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.scarf-prize {
+  display: block;
+  width: min(100%, 340px);
+  max-height: 440px;
+  object-fit: contain;
+  margin: 24px auto;
+  border: 1px solid #ffffffc9;
+  border-radius: 22px;
+  box-shadow: 0 16px 42px #9c45652b;
+}
+@media(max-width:520px) {
+  #app { padding: 12px; }
+  .card { padding: 25px 20px; }
+}
+</style>
+</head>
+<body>
+<main id="app">
+
+<section class="card cute-page" id="homePage">
+  <div class="topline">
+    <span><i class="dot"></i> a tiny question for you</span>
+    <span class="index">♡ JUST FOR YOU</span>
+  </div>
+
+  <div class="cat-sticker">
+    <svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1">
+          <stop stop-color="#fff8ef"/>
+          <stop offset="1" stop-color="#e9c3b4"/>
+        </linearGradient>
+      </defs>
+      <path d="M43 117 C21 107 14 132 25 143 C31 149 38 139 45 136 C52 157 78 166 106 162 L164 161 C190 158 205 140 197 119 C192 104 179 98 168 100 L55 100Z" fill="url(#fur)" stroke="#292326" stroke-width="3"/>
+      <path d="M49 77 C47 48 54 18 73 15 C88 13 104 27 117 36 C133 23 153 10 168 20 C181 29 184 54 180 78 C198 95 199 121 182 136 C164 152 125 151 93 145 C60 139 39 119 39 99 C39 90 42 83 49 77Z" fill="url(#fur)" stroke="#292326" stroke-width="3.5"/>
+      <ellipse cx="82" cy="91" rx="8" ry="12" fill="#211d20"/>
+      <ellipse cx="145" cy="91" rx="8" ry="12" fill="#211d20"/>
+      <circle cx="85" cy="87" r="3" fill="white"/>
+      <circle cx="148" cy="87" r="3" fill="white"/>
+      <path d="M108 99 Q113 105 118 99 Q123 105 128 99" fill="none" stroke="#292326" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="58" cy="111" rx="12" ry="7" fill="#efad9d" opacity=".6"/>
+      <ellipse cx="168" cy="111" rx="12" ry="7" fill="#efad9d" opacity=".6"/>
+    </svg>
+  </div>
+
+  <h1 class="cute-title">Hey, <span>you!</span></h1>
+  <p class="cute-subtitle">
+    A little page, a few silly friends, and one question I've been wanting to ask...
+  </p>
+
+  <div class="question-box">
+    <div class="cute-question">DO u like me??</div>
+  </div>
+
+  <div class="cute-actions">
+    <button class="yes" id="yesBtn">Yes! 💚</button>
+    <button class="no" id="noBtn">No 🙈</button>
+  </div>
+  <div class="cute-reply" id="reply"></div>
+  <div class="tiny-note">Whatever your answer, it's okay. No pressure ♡</div>
+</section>
+
+<section class="card question-page" id="questionPage">
+  <div class="topline">
+    <span><i class="dot"></i> getting to know you</span>
+    <span class="index">♡ PART TWO</span>
+  </div>
+
+  <div class="question-cats">
+    <svg viewBox="0 0 100 90"><path d="M13 36 18 8 39 22 Q50 17 61 22 L82 8 87 39 Q94 70 68 78 Q50 87 30 78 Q5 68 13 36Z" fill="#f7e4d9" stroke="#50313c" stroke-width="3"/><ellipse cx="36" cy="48" rx="4" ry="6" fill="#30232b"/><ellipse cx="64" cy="48" rx="4" ry="6" fill="#30232b"/><path d="M46 58 Q50 63 54 58" fill="none" stroke="#50313c" stroke-width="2.5"/></svg>
+    <svg viewBox="0 0 100 90"><path d="M13 36 18 8 39 22 Q50 17 61 22 L82 8 87 39 Q94 70 68 78 Q50 87 30 78 Q5 68 13 36Z" fill="#f8dce8" stroke="#50313c" stroke-width="3"/><ellipse cx="36" cy="48" rx="4" ry="6" fill="#30232b"/><ellipse cx="64" cy="48" rx="4" ry="6" fill="#30232b"/><path d="M46 58 Q50 63 54 58" fill="none" stroke="#50313c" stroke-width="2.5"/></svg>
+    <svg viewBox="0 0 100 90"><path d="M13 36 18 8 39 22 Q50 17 61 22 L82 8 87 39 Q94 70 68 78 Q50 87 30 78 Q5 68 13 36Z" fill="#fff0d8" stroke="#50313c" stroke-width="3"/><ellipse cx="36" cy="48" rx="4" ry="6" fill="#30232b"/><ellipse cx="64" cy="48" rx="4" ry="6" fill="#30232b"/><path d="M46 58 Q50 63 54 58" fill="none" stroke="#50313c" stroke-width="2.5"/></svg>
+    <svg viewBox="0 0 100 90"><path d="M13 36 18 8 39 22 Q50 17 61 22 L82 8 87 39 Q94 70 68 78 Q50 87 30 78 Q5 68 13 36Z" fill="#f7e4d9" stroke="#50313c" stroke-width="3"/><ellipse cx="36" cy="48" rx="4" ry="6" fill="#30232b"/><ellipse cx="64" cy="48" rx="4" ry="6" fill="#30232b"/><path d="M46 58 Q50 63 54 58" fill="none" stroke="#50313c" stroke-width="2.5"/></svg>
+  </div>
+
+  <h2>Yay! Let's get to know you 💗</h2>
+  <p class="intro">Answer a few little questions. Share only what you feel comfortable sharing.</p>
+
+  <form class="question-form" id="questionForm">
+    <label>
+      1. What's your favourite food?
+      <input name="food" type="text" placeholder="Pizza, biryani, ice cream..." required>
+    </label>
+    <label>
+      2. What's your favourite hobby?
+      <input name="hobby" type="text" placeholder="Drawing, music, games..." required>
+    </label>
+    <label>
+      3. What's a song you never get tired of?
+      <input name="song" type="text" placeholder="Your favourite song" required>
+    </label>
+    <button type="button" id="finishQuestionsBtn">Send my answers 💌</button>
+  </form>
+</section>
+
+<section class="card reward-page" id="rewardPage">
+  <div class="topline">
+    <span><i class="dot"></i> a little surprise</span>
+    <span class="index">♡ PART THREE</span>
+  </div>
+
+  <h2>You won this! 🎀</h2>
+  <p>A little gift for you. Hope it makes you smile! 💗</p>
+  <div class="countdown" id="countdown">14 days 00:00:00</div>
+  <p>Your 14-day little countdown starts now ♡</p>
+
+  <!-- Replace this image URL with your scarf picture if needed -->
+  <img class="scarf-prize" src="https://i.ibb.co/nMYWyxDb/images-1.jpg" alt="Burgundy knitted scarf with two white bows">
+
+  <p>Thank you for answering all my questions ♡</p>
+</section>
+
+</main>
+
+<script>
+const reply = document.getElementById('reply');
+const yesBtn = document.getElementById('yesBtn');
+let yesScale = 1;
+
+document.getElementById('noBtn').addEventListener('click', () => {
+  yesScale = Math.min(yesScale + 0.65, 5.5);
+  yesBtn.style.transform = `scale(${yesScale})`;
+  reply.textContent = 'The Yes button is getting excited 😄';
+});
+
+yesBtn.addEventListener('click', () => {
+  document.getElementById('homePage').style.display = 'none';
+  document.getElementById('questionPage').style.display = 'block';
+});
+
+function openRewardPage() {
+  const form = document.getElementById('questionForm');
+
+  if (!form.reportValidity()) return;
+
+  document.getElementById('questionPage').style.display = 'none';
+  document.getElementById('rewardPage').style.display = 'block';
+
+  const timerKey = 'littleSurpriseCountdownEnd';
+  let endTime = Date.now() + 14 * 24 * 60 * 60 * 1000;
+
+  try {
+    const savedEndTime = Number(localStorage.getItem(timerKey));
+
+    if (savedEndTime > Date.now()) {
+      endTime = savedEndTime;
+    } else {
+      localStorage.setItem(timerKey, String(endTime));
+    }
+  } catch (error) {}
+
+  const timer = document.getElementById('countdown');
+
+  function updateCountdown() {
+    const remaining = Math.max(0, endTime - Date.now());
+
+    const days = Math.floor(remaining / 86400000);
+    const hours = Math.floor((remaining % 86400000) / 3600000);
+    const minutes = Math.floor((remaining % 3600000) / 60000);
+    const seconds = Math.floor((remaining % 60000) / 1000);
+
+    timer.textContent =
+      days + ' days ' +
+      String(hours).padStart(2, '0') + ':' +
+      String(minutes).padStart(2, '0') + ':' +
+      String(seconds).padStart(2, '0');
+
+    if (remaining === 0) {
+      timer.textContent = 'The 14 days are up! ♡';
+    }
+  }
+
+  updateCountdown();
+  window.setInterval(updateCountdown, 1000);
+}
+
+document.getElementById('finishQuestionsBtn')
+  .addEventListener('click', openRewardPage);
+
+document.getElementById('questionForm')
+  .addEventListener('submit', (event) => {
+    event.preventDefault();
+    openRewardPage();
+  });
+</script>
+
+</body>
+</html>
+```
